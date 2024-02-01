@@ -1,0 +1,3 @@
+D:/cubecode/FreeRTOS01/cmake-build-debug/CMakeFiles/FreeRTOS01.elf.dir
+D:/cubecode/FreeRTOS01/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/cubecode/FreeRTOS01/cmake-build-debug/CMakeFiles/rebuild_cache.dir
