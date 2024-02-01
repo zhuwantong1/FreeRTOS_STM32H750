@@ -125,7 +125,7 @@ __weak void LedTask(void const * argument)
   for(;;)
   {
       HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-      osDelay(500);
+      osDelay(200);
   }
   /* USER CODE END LedTask */
 }

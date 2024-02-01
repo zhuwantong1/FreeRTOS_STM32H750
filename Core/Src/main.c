@@ -107,10 +107,10 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
-  MX_FREERTOS_Init();
-
-  /* Start scheduler */
-  osKernelStart();
+//  MX_FREERTOS_Init();
+//
+//  /* Start scheduler */
+//  osKernelStart();
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -119,6 +119,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+      BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
+
+      /* 开发板硬件初始化 */
+
+      /* 创建AppTaskCreate任务 */
+      xReturn = xTaskCreate((TaskFunction_t )AppTaskCreate,  /* 任务入口函数 */
+                            (const char*    )"AppTaskCreate",/* 任务名字 */
+                            (uint16_t       )512,  /* 任务栈大小 */
+                            (void*          )NULL,/* 任务入口函数参数 */
+                            (UBaseType_t    )1, /* 任务的优先级 */
+                            (TaskHandle_t*  )&AppTaskCreate_Handle);/* 任务控制块指针 */
+      /* 启动任务调度 */
+      if(pdPASS == xReturn)
+          vTaskStartScheduler();   /* 启动任务，开启调度 */
 
 
   }
@@ -194,34 +208,34 @@ static void LED_Task(void* parameter)
     while (1)
     {
         HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET);
-        HAL_Delay(500);
+        vTaskDelay(200);   /* 延时500个tick */
 
 
         HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
-        vTaskDelay(500);   /* 延时500个tick */
-        HAL_Delay(500);
+        vTaskDelay(200);   /* 延时500个tick */
+
 
     }
 }
 static void AppTaskCreate(void)
 {
-    BaseType_t xReturn = pdPASS;/* 定义�?个创建信息返回�?�，默认为pdPASS */
+    BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
 
-    taskENTER_CRITICAL();           //进入临界�?
+    taskENTER_CRITICAL();           //进入临界区
 
     /* 创建LED_Task任务 */
     xReturn = xTaskCreate((TaskFunction_t )LED_Task, /* 任务入口函数 */
                           (const char*    )"LED_Task",/* 任务名字 */
-                          (uint16_t       )512,   /* 任务栈大�? */
+                          (uint16_t       )512,   /* 任务栈大小? */
                           (void*          )NULL,	/* 任务入口函数参数 */
                           (UBaseType_t    )2,	    /* 任务的优先级 */
-                          (TaskHandle_t*  )&LED_Task_Handle);/* 任务控制块指�? */
+                          (TaskHandle_t*  )&LED_Task_Handle);/* 任务控制块指针 */
     if(pdPASS == xReturn)
 
 
     vTaskDelete(AppTaskCreate_Handle); //删除AppTaskCreate任务
 
-    taskEXIT_CRITICAL();            //�?出临界区
+    taskEXIT_CRITICAL();            //退出临界区
 }
 
 /* USER CODE END 4 */
