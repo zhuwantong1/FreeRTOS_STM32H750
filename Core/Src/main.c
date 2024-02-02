@@ -119,20 +119,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
-
-      /* 开发板硬件初始化 */
-
-      /* 创建AppTaskCreate任务 */
-      xReturn = xTaskCreate((TaskFunction_t )AppTaskCreate,  /* 任务入口函数 */
-                            (const char*    )"AppTaskCreate",/* 任务名字 */
-                            (uint16_t       )512,  /* 任务栈大小 */
-                            (void*          )NULL,/* 任务入口函数参数 */
-                            (UBaseType_t    )1, /* 任务的优先级 */
-                            (TaskHandle_t*  )&AppTaskCreate_Handle);/* 任务控制块指针 */
-      /* 启动任务调度 */
-      if(pdPASS == xReturn)
-          vTaskStartScheduler();   /* 启动任务，开启调度 */
+//      BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
+//
+//      /* 开发板硬件初始化 */
+//
+//      /* 创建AppTaskCreate任务 */
+//      xReturn = xTaskCreate((TaskFunction_t )AppTaskCreate,  /* 任务入口函数 */
+//                            (const char*    )"AppTaskCreate",/* 任务名字 */
+//                            (uint16_t       )512,  /* 任务栈大小 */
+//                            (void*          )NULL,/* 任务入口函数参数 */
+//                            (UBaseType_t    )1, /* 任务的优先级 */
+//                            (TaskHandle_t*  )&AppTaskCreate_Handle);/* 任务控制块指针 */
+//      /* 启动任务调度 */
+//      if(pdPASS == xReturn)
+//          vTaskStartScheduler();   /* 启动任务，开启调度 */
 
 
   }
